@@ -682,4 +682,128 @@ public class BraveSyncScreensPreference extends PreferenceFragment
 
       return control;
   }
+
+  private void showEndDialog(String message) {
+      AlertDialog.Builder alert = new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme);
+      if (null == alert) {
+          return;
+      }
+      DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int button) {
+          }
+      };
+      AlertDialog alertDialog = alert
+              .setTitle(getResources().getString(R.string.sync_device))
+              .setMessage(message)
+              .setPositiveButton(R.string.ok, onClickListener)
+              .create();
+      alertDialog.getDelegate().setHandleNativeActionModesEnabled(false);
+      alertDialog.show();
+  }
+
+  private void showAddDeviceNameDialog() {
+      LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(
+              Context.LAYOUT_INFLATER_SERVICE);
+      View view = inflater.inflate(R.layout.add_sync_device_name_dialog, null);
+      final EditText input = (EditText) view.findViewById(R.id.device_name);
+
+      DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int button) {
+              if (button == AlertDialog.BUTTON_POSITIVE) {
+                  mDeviceName = input.getText().toString();
+                  if (mDeviceName.isEmpty()) {
+                      mDeviceName = input.getHint().toString();
+                  }
+                  SharedPreferences sharedPref = getActivity().getApplicationContext().getSharedPreferences(PREF_NAME, 0);
+                  SharedPreferences.Editor editor = sharedPref.edit();
+                  editor.putString(PREF_SYNC_DEVICE_NAME, mDeviceName);
+                  editor.apply();
+                  if (null != mImageView) {
+                      mImageView.setVisibility(View.GONE);
+                  }
+                  if (null != mNewToSyncButton) {
+                      mNewToSyncButton.setVisibility(View.GONE);
+                  }
+                  if (null != mHaveASyncCodeButton) {
+                      mHaveASyncCodeButton.setVisibility(View.GONE);
+                  }
+                  if (null != mEnterWordsLayout) {
+                      mEnterWordsLayout.setVisibility(View.GONE);
+                  }
+                  if (null != mEnterCodeWordsButton) {
+                      mEnterCodeWordsButton.setVisibility(View.VISIBLE);
+                  }
+                  setQRCodeText();
+                  if (null != mCameraSourcePreview) {
+                      mCameraSourcePreview.setVisibility(View.VISIBLE);
+                      int rc = ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.CAMERA);
+                      if (rc == PackageManager.PERMISSION_GRANTED) {
+                          try {
+                            startCameraSource();
+                          } catch (SecurityException exc) {
+                          }
+                      }
+                  }
+              }
+          }
+      };
+
+      AlertDialog.Builder alert = new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme);
+      if (null == alert) {
+          return;
+      }
+      AlertDialog alertDialog = alert
+              .setTitle(R.string.sync_settings_add_device_name_title)
+              .setMessage(getResources().getString(R.string.sync_settings_add_device_name_label))
+              .setView(view)
+              .setPositiveButton(R.string.ok, onClickListener)
+              .setNegativeButton(R.string.cancel, onClickListener)
+              .create();
+      alertDialog.getDelegate().setHandleNativeActionModesEnabled(false);
+      alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+          @Override
+          public void onShow(DialogInterface dialog) {
+              UiUtils.showKeyboard(input);
+          }
+      });
+      alertDialog.show();
+      Button cancelButton = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+      cancelButton.setVisibility(View.GONE);
+  }
+
+  private void ResetSyncDialog() {
+      AlertDialog.Builder alert = new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme);
+      if (null == alert) {
+          return;
+      }
+      DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int button) {
+              if (button == AlertDialog.BUTTON_POSITIVE) {
+                  ChromeSwitchPreference syncSwitch = (ChromeSwitchPreference) findPreference(PREF_SYNC_SWITCH);
+                  if (null != syncSwitch) {
+                      syncSwitch.setChecked(false);
+                      if (null != mSyncSwitch) {
+                          mSyncSwitch.setChecked(false);
+                      }
+                  }
+                  ChromeApplication application = (ChromeApplication)ContextUtils.getApplicationContext();
+                  if (null != application && null != application.mBraveSyncWorker) {
+                      application.mBraveSyncWorker.ResetSync();
+                  }
+                  setAppropriateView();
+              }
+          }
+      };
+      AlertDialog alertDialog = alert
+              .setTitle(getResources().getString(R.string.reset_sync))
+              .setMessage(getResources().getString(R.string.resetting_sync))
+              .setPositiveButton(R.string.ok, onClickListener)
+              .setNegativeButton(R.string.cancel, onClickListener)
+              .create();
+      alertDialog.getDelegate().setHandleNativeActionModesEnabled(false);
+      alertDialog.show();
+  }
 }
