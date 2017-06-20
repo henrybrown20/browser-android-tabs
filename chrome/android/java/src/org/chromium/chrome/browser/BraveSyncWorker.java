@@ -41,10 +41,9 @@ public class BraveSyncWorker {
 
     private static final String PREF_NAME = "SyncPreferences";
     private static final String PREF_LAST_FETCH_NAME = "TimeLastFetch";
-    // TODO should by encrypted properly
     private static final String PREF_DEVICE_ID = "DeviceId";
     private static final String PREF_SEED = "Seed";
-    //
+    private static final String PREF_SYNC_DEVICE_NAME = "SyncDeviceName";
     private static final int INTERVAL_TO_FETCH_RECORDS = 1000 * 60;    // Milliseconds
     private static final int INTERVAL_TO_REFETCH_RECORDS = 5000 * 60;    // Milliseconds
     private static final int LAST_RECORDS_COUNT = 980;
@@ -386,8 +385,39 @@ public class BraveSyncWorker {
         mLatestRecordTimeStampt = latestRecordTimeStampt;
         String res = "";
 
-        //to do debug
-        /*int iPos = recordsJSON.indexOf("parentFolderObjectId");
+        // Debug
+        /*int iPos = recordsJSON.indexOf("NewFolder3");
+        if (-1 != iPos) {
+            if (iPos + 2000 > recordsJSON.length()) {
+                Log.i("TAG", "!!!GetExistingObjects == " + recordsJSON.substring(iPos));
+            } else {
+                Log.i("TAG", "!!!GetExistingObjects == " + recordsJSON.substring(iPos, iPos + 2000));
+            }
+            if (iPos > 500) {
+                if (iPos + 1500 > recordsJSON.length()) {
+                    Log.i("TAG", "!!!GetExistingObjects == " + recordsJSON.substring(iPos - 500));
+                } else {
+                    Log.i("TAG", "!!!GetExistingObjects == " + recordsJSON.substring(iPos - 500, iPos + 1500));
+                }
+            }
+        }*/
+        /*iPos = recordsJSON.indexOf("\"objectId\":{\"0\":26,\"1\":251", iPos + 1);
+        if (-1 != iPos) {
+            if (iPos + 2000 > recordsJSON.length()) {
+                Log.i("TAG", "!!!GetExistingObjects1 == " + recordsJSON.substring(iPos));
+            } else {
+                Log.i("TAG", "!!!GetExistingObjects1 == " + recordsJSON.substring(iPos, iPos + 2000));
+            }
+            if (iPos > 500) {
+                if (iPos + 1500 > recordsJSON.length()) {
+                    Log.i("TAG", "!!!GetExistingObjects1 == " + recordsJSON.substring(iPos - 500));
+                } else {
+                    Log.i("TAG", "!!!GetExistingObjects1 == " + recordsJSON.substring(iPos - 500, iPos + 1500));
+                }
+            }
+        }*/
+        //Log.i("TAG", "!!!recordsJSON == " + recordsJSON);
+        /*int iPos = recordsJSON.indexOf("Just kidding");
         if (-1 != iPos) {
             Log.i("TAG", "!!!record == " + recordsJSON.substring(iPos, iPos + 2000));
         }*/
