@@ -421,6 +421,20 @@ public class BraveSyncWorker {
         if (-1 != iPos) {
             Log.i("TAG", "!!!record == " + recordsJSON.substring(iPos, iPos + 2000));
         }*/
+        /*int step = 2000;
+        int count = 0;
+        for (;;) {
+            int endIndex = count * step + step;
+            if (endIndex > recordsJSON.length() - 1) {
+                endIndex = recordsJSON.length() - 1;
+            }
+            String substr = recordsJSON.substring(count * step, endIndex);
+            Log.i("TAG", "!!!substr == " + substr);
+            if (endIndex != count * step + step) {
+                break;
+            }
+            count++;
+        }*/
         //
 
         int count = 0;
@@ -502,6 +516,20 @@ public class BraveSyncWorker {
         }
         //to do debug
         //Log.i("TAG", "!!!GetExistingObjects res == " + res);
+        /*int step = 2000;
+        int count = 0;
+        for (;;) {
+            int endIndex = count * step + step;
+            if (endIndex > res.length() - 1) {
+                endIndex = res.length() - 1;
+            }
+            String substr = res.substring(count * step, endIndex);
+            Log.i("TAG", "!!!substr == " + substr);
+            if (endIndex != count * step + step) {
+                break;
+            }
+            count++;
+        }*/
         //
 
         return res;
