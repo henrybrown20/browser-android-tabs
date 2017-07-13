@@ -204,8 +204,17 @@ public class BraveSyncWorker {
         String bookmarkRequest = "bookmark:";
         bookmarkRequest += "{ site:";
         bookmarkRequest += "{ location: \"" + url + "\", ";
-        bookmarkRequest += "title: \"" + title.replace("\\", "\\\\").replace("\"", "\\\"") + "\", ";
-        bookmarkRequest += "customTitle: '', ";
+        if (!isFolder) {
+            bookmarkRequest.append("title: \"").append(title.replace("\\", "\\\\").replace("\"", "\\\"")).append("\", ");
+            bookmarkRequest.append("customTitle: \"").append(customTitle.replace("\\", "\\\\").replace("\"", "\\\"")).append("\", ");
+        } else {
+            bookmarkRequest.append("title: \"\", ");
+            if (!customTitle.isEmpty()) {
+                bookmarkRequest.append("customTitle: \"").append(customTitle.replace("\\", "\\\\").replace("\"", "\\\"")).append("\", ");
+            } else {
+                bookmarkRequest.append("customTitle: \"").append(title.replace("\\", "\\\\").replace("\"", "\\\"")).append("\", ");
+            }
+        }
         bookmarkRequest += "lastAccessedTime: 0, ";
         bookmarkRequest += "creationlderObjectId: " + parentFolderId + " }}";
 
