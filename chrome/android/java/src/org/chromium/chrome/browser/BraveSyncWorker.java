@@ -1116,6 +1116,9 @@ public class BraveSyncWorker {
                 mSyncIsReady.mDeleteSiteSettingsReady = true;
                 break;
               case "sync-ready":
+                if (null == mDefaultFolder) {
+                    GetDefaultFolderId();
+                }
                 mSyncIsReady.mReady = true;
                 FetchSyncRecords("");
                 break;
