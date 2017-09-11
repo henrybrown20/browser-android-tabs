@@ -331,7 +331,7 @@ public class NewTabPageView extends FrameLayout implements TileGroup.Observer, O
 
         mNewTabPageLayout.addOnLayoutChangeListener(this);
         setSearchProviderInfo(searchProviderHasLogo, searchProviderIsGoogle);
-        mSearchProviderLogoView.showSearchProviderInitialView();
+        //mSearchProviderLogoView.showSearchProviderInitialView();
 
         mTileGroup.startObserving(getMaxTileRows(searchProviderHasLogo) * getMaxTileColumns());
 
