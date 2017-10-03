@@ -1955,7 +1955,7 @@ public class ContextualSearchManagerTest {
      */
     @Test
     @SmallTest
-    @Feature({"ContextualSearch"})
+    @Feature({"ContextualSearch", "ApplyLater"})
     @Restriction(UiRestriction.RESTRICTION_TYPE_PHONE)
     @DisableIf.Build(supported_abis_includes = "arm64-v8a", message = "crbug.com/596533")
     public void testAppMenuSuppressedWhenExpanded() throws InterruptedException, TimeoutException {
@@ -2368,7 +2368,7 @@ public class ContextualSearchManagerTest {
      */
     @Test
     @SmallTest
-    @Feature({"ContextualSearch"})
+    @Feature({"ContextualSearch", "ApplyLater"})
     @Restriction(UiRestriction.RESTRICTION_TYPE_PHONE)
     @CommandLineFlags.Add(ContextualSearchFieldTrial.PEEK_PROMO_ENABLED + "=true")
     @DisableIf.Build(supported_abis_includes = "arm64-v8a", message = "crbug.com/596533")

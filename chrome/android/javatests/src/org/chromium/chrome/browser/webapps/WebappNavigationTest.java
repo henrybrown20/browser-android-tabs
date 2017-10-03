@@ -224,7 +224,7 @@ public class WebappNavigationTest {
 
     @Test
     @SmallTest
-    @Feature({"Webapps"})
+    @Feature({"Webapps", "ApplyLater"})
     @RetryOnFailure
     public void testRegularLinkToExternalApp() throws Exception {
         runWebappActivityAndWaitForIdle(mActivityTestRule.createIntent());
@@ -243,7 +243,7 @@ public class WebappNavigationTest {
 
     @Test
     @SmallTest
-    @Feature({"Webapps"})
+    @Feature({"Webapps", "ApplyLater"})
     @RetryOnFailure
     public void testNewTabLinkToExternalApp() throws Exception {
         runWebappActivityAndWaitForIdle(mActivityTestRule.createIntent());

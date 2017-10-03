@@ -135,7 +135,7 @@ public class PasswordViewingTypeTest {
      */
     @Test
     @SmallTest
-    @Feature({"Sync"})
+    @Feature({"Sync", "ApplyLater"})
     public void testUserRedirectSyncSettings() throws InterruptedException {
         setSyncability(true);
         overrideProfileSyncService(false);

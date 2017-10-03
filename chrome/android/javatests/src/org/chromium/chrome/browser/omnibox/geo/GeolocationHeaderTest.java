@@ -191,7 +191,7 @@ public class GeolocationHeaderTest extends ChromeActivityTestCaseBase<ChromeActi
     }
 
     @SmallTest
-    @Feature({"Location"})
+    @Feature({"Location", "ApplyLater"})
     @CommandLineFlags.Add({ENABLE_FEATURES + XGEO_VISIBLE_NETWORKS_FEATURE})
     public void testGpsFallbackYounger() throws ProcessInitException {
         long now = System.currentTimeMillis();
@@ -206,7 +206,7 @@ public class GeolocationHeaderTest extends ChromeActivityTestCaseBase<ChromeActi
     }
 
     @SmallTest
-    @Feature({"Location"})
+    @Feature({"Location", "ApplyLater"})
     @CommandLineFlags.Add({ENABLE_FEATURES + XGEO_VISIBLE_NETWORKS_FEATURE})
     public void testGpsFallbackOlder() throws ProcessInitException {
         long now = System.currentTimeMillis();
