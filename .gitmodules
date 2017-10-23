@@ -12,7 +12,7 @@
 	url = https://github.com/brave/tracking-protection.git
 [submodule "braveSync"]
 	path = braveSync
-	url = https://github.com/brave/sync
+	url = https://github.com/brave/sync.git
 [submodule "niceware"]
 	path = niceware
 	url = https://github.com/diracdeltas/niceware.git
